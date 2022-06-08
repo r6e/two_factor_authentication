@@ -12,16 +12,16 @@ jobs:
     name: Rails 6.0
     uses: ./.github/workflows/rails.yml
     with:
-      rails-version: "~> 6.0.0"
+      rails-version: ">= 6.0, < 6.1"
 
   build-6-1:
     name: Rails 6.1
     uses: ./.github/workflows/rails.yml
     with:
-      rails-version: "~> 6.1.0"
+      rails-version: ">= 6.1, < 7.0"
 
   build-7-0:
     name: Rails 7.0
     uses: ./.github/workflows/rails.yml
     with:
-      rails-version: "~> 7.0.0"
+      rails-version: ">= 7.0"

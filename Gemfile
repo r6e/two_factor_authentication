@@ -5,17 +5,16 @@ gemspec
 
 rails_version = ENV["RAILS_VERSION"] || "default"
 
-rails = case rails_version
-        when "master"
-          {github: "rails/rails"}
-        when "default"
-          "~> 7.0.3"
-        else
-          rails_version
-        end
+case rails_version
+when 'master'
+  gem 'rails', {github: 'rails/rails'}
+when 'default'
+  gem 'rails', '~> 7.0.3'
+else
+  gem 'rails', *rails_version.split(', ')
+end
 
-gem "rails", rails
-gem "railties", rails # rspec-rails tries to grab the absolute latest on GitHub actions
+# gem "railties", rails # rspec-rails tries to grab the absolute latest on GitHub actions
 
 if Gem::Version.new(RUBY_VERSION) >= Gem::Version.new('3.0.0')
   gem 'net-smtp', require: false
