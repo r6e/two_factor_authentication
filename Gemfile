@@ -15,6 +15,7 @@ rails = case rails_version
         end
 
 gem "rails", rails
+gem "actionpack", rails
 
 if Gem::Version.new(RUBY_VERSION) >= Gem::Version.new('3.0.0')
   gem 'net-smtp', require: false
@@ -22,6 +23,7 @@ end
 
 group :test, :development do
   gem 'sqlite3'
+  gem 'rspec-rails'
 end
 
 group :test do

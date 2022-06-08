@@ -21,7 +21,7 @@ jobs:
       rails-version: "~> 6.1.0"
 
   build-7-0:
-    name: Rails 6.2
+    name: Rails 7.0
     uses: ./.github/workflows/rails.yml
     with:
       rails-version: "~> 7.0.0"
