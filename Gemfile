@@ -11,7 +11,7 @@ rails = case rails_version
         when "default"
           "~> 7.0.3"
         else
-          "~> #{rails_version}"
+          rails_version
         end
 
 gem "rails", rails
