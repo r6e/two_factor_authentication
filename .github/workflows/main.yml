@@ -8,20 +8,31 @@ on:
   pull_request:
 
 jobs:
-  build-6-0:
-    name: Rails 6.0
-    uses: ./.github/workflows/rails.yml
-    with:
-      rails-version: "~> 6.0"
-
-  build-6-1:
-    name: Rails 6.1
-    uses: ./.github/workflows/rails.yml
-    with:
-      rails-version: "~> 6.1"
-
-  build-7-0:
-    name: Rails 7.0
-    uses: ./.github/workflows/rails.yml
-    with:
-      rails-version: "~> 7.0"
+  build:
+    runs-on: ubuntu-latest
+    name: Ruby ${{ matrix.ruby }} / Rails ${{ matrix.rails }}
+    strategy:
+      matrix:
+        ruby:
+          - 2.7.6
+          - 3.0.4
+          - 3.1.2
+          - 3.2.0-preview1
+        rails:
+          - "~> 6.0"
+          - "~> 6.1"
+          - "~> 7.0"
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Ruby 2.7.6
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: ${{ matrix.ruby }}
+        bundler-cache: true
+      env:
+        RAILS_VERSION: ${{ matrix.rails }}
+    - name: Run the default task
+      run: bundle exec rake
+      env:
+        RAILS_VERSION: ${{ matrix.rails }}
+        RUBY_VERSION: ${{ matrix.rails }}
