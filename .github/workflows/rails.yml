@@ -9,25 +9,81 @@ on:
 
 jobs:
   build-2-7:
-    uses: ./.github/workflows/ruby.yml
-    with:
-      ruby-version: 2.7.6
-      rails-version: ${{ inputs.rails-version }}
+    runs-on: ubuntu-latest
+    name: Ruby ${{ matrix.ruby }}
+    strategy:
+      matrix:
+        ruby:
+          - 2.7.6
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Ruby 2.7.6
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: ${{ matrix.ruby }}
+        bundler-cache: true
+    - name: Run the default task
+      run: bundle exec rake
+      env:
+        RAILS_VERSION: ${{ inputs.rails-version }}
+        RUBY_VERSION: 2.7.6
 
   build-3-0:
-    uses: ./.github/workflows/ruby.yml
-    with:
-      ruby-version: 3.0.4
-      rails-version: ${{ inputs.rails-version }}
+    runs-on: ubuntu-latest
+    name: Ruby ${{ matrix.ruby }}
+    strategy:
+      matrix:
+        ruby:
+          - 3.0.4
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Ruby 3.0.4
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: ${{ matrix.ruby }}
+        bundler-cache: true
+    - name: Run the default task
+      run: bundle exec rake
+      env:
+        RAILS_VERSION: ${{ inputs.rails-version }}
+        RUBY_VERSION: 3.0.4
 
   build-3-1:
-    uses: ./.github/workflows/ruby.yml
-    with:
-      ruby-version: 3.1.2
-      rails-version: ${{ inputs.rails-version }}
+    runs-on: ubuntu-latest
+    name: Ruby ${{ matrix.ruby }}
+    strategy:
+      matrix:
+        ruby:
+          - 3.1.2
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Ruby 3.1.2
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: ${{ matrix.ruby }}
+        bundler-cache: true
+    - name: Run the default task
+      run: bundle exec rake
+      env:
+        RAILS_VERSION: ${{ inputs.rails-version }}
+        RUBY_VERSION: 3.1.2
 
   build-3-2:
-    uses: ./.github/workflows/ruby.yml
-    with:
-      ruby-version: 3.2.0-preview1
-      rails-version: ${{ inputs.rails-version }}
+    runs-on: ubuntu-latest
+    name: Ruby ${{ matrix.ruby }}
+    strategy:
+      matrix:
+        ruby:
+          - 3.2.0-preview1
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Ruby 3.2.0-preview1
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: ${{ matrix.ruby }}
+        bundler-cache: true
+    - name: Run the default task
+      run: bundle exec rake
+      env:
+        RAILS_VERSION: ${{ inputs.rails-version }}
+        RUBY_VERSION: 3.2.0-preview1
