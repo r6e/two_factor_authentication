@@ -22,7 +22,7 @@ if Gem::Version.new(RUBY_VERSION) >= Gem::Version.new("3.0.0")
 end
 
 # TODO: Implement a lighter-weight way of doing this
-if Gem::Version.new(rail_version) >= Gem::Version.new("7.0")
+if Gem::Version.new(rails_version) >= Gem::Version.new("7.0")
   gem "sprockets-rails"
 end
 
