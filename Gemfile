@@ -15,7 +15,7 @@ rails = case rails_version
         end
 
 gem "rails", rails
-gem "actionpack", rails
+gem "railties", rails # rspec-rails tries to grab the absolute latest on GitHub actions
 
 if Gem::Version.new(RUBY_VERSION) >= Gem::Version.new('3.0.0')
   gem 'net-smtp', require: false
