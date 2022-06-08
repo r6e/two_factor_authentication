@@ -1,31 +1,35 @@
+require:
+  - rubocop-performance
+  - rubocop-rails
+  - rubocop-rake
+  - rubocop-rspec
+  - rubocop-thread_safety
+
 AllCops:
   Include:
     - '**/Gemfile'
     - '**/Rakefile'
+  NewCops: enable
+  TargetRubyVersion: 3.1
   UseCache: true
 
-Lint/AssignmentInCondition:
-  Description: Don't use assignment in conditions.
-  StyleGuide: https://github.com/bbatsov/ruby-style-guide#safe-assignment-in-condition
+Rails:
   Enabled: true
-  AllowSafeAssignment: true
-Lint/EachWithObjectArgument:
-  Description: Check for immutable argument given to each_with_object.
+
+Style/StringLiterals:
   Enabled: true
-Lint/HandleExceptions:
-  Description: Don't suppress exception.
-  StyleGuide: https://github.com/bbatsov/ruby-style-guide#dont-hide-exceptions
+  EnforcedStyle: double_quotes
+
+Style/StringLiteralsInInterpolation:
   Enabled: true
-Lint/LiteralInCondition:
-  Description: Checks of literals used in conditions.
-  Enabled: true
-Lint/LiteralInInterpolation:
-  Description: Checks for literals used in interpolation.
-  Enabled: true
-Lint/ParenthesesAsGroupedExpression:
-  Description: Checks for method calls with a space before the opening parenthesis.
-  StyleGuide: https://github.com/bbatsov/ruby-style-guide#parens-no-spaces
-  Enabled: true
+  EnforcedStyle: double_quotes
+
+Layout/LineLength:
+  Max: 120
+  AllowURI: true
+  URISchemes:
+  - http
+  - https
 
 Metrics/AbcSize:
   Description: A calculated magnitude based on number of assignments, branches, and
@@ -46,15 +50,6 @@ Metrics/CyclomaticComplexity:
     cases needed to validate a method.
   Enabled: true
   Max: 6
-Metrics/LineLength:
-  Description: Limit lines to 80 characters.
-  StyleGuide: https://github.com/bbatsov/ruby-style-guide#80-character-limits
-  Enabled: true
-  Max: 100
-  AllowURI: true
-  URISchemes:
-  - http
-  - https
 Metrics/MethodLength:
   Description: Avoid methods longer than 10 lines of code.
   StyleGuide: https://github.com/bbatsov/ruby-style-guide#short-methods
@@ -94,7 +89,7 @@ Rails/TimeZone:
     - strict
     - flexible
 
-Style/AccessorMethodName:
+Naming/AccessorMethodName:
   Description: Check the naming of accessor methods for get_/set_.
   Enabled: false
 Style/AndOr:
@@ -127,7 +122,7 @@ Style/CollectionMethods:
 Style/Documentation:
   Description: Document classes and non-namespace modules.
   Enabled: false
-Style/DotPosition:
+Layout/DotPosition:
   Description: Checks the position of the dot in multi-line method calls.
   StyleGuide: https://github.com/bbatsov/ruby-style-guide#consistent-multi-line-chains
   Enabled: true
@@ -146,7 +141,7 @@ Style/EmptyLiteral:
   Description: Prefer literals to Array.new/Hash.new/String.new.
   StyleGuide: https://github.com/bbatsov/ruby-style-guide#literal-array-hash
   Enabled: true
-Style/FileName:
+Naming/FileName:
   Description: Use snake_case for source file names.
   StyleGuide: https://github.com/bbatsov/ruby-style-guide#snake-case-files
   Enabled: true
@@ -156,11 +151,6 @@ Style/GuardClause:
   StyleGuide: https://github.com/bbatsov/ruby-style-guide#no-nested-conditionals
   Enabled: true
   MinBodyLength: 1
-Style/IfUnlessModifier:
-  Description: Favor modifier if/unless usage when you have a single-line body.
-  StyleGuide: https://github.com/bbatsov/ruby-style-guide#if-as-a-modifier
-  Enabled: false
-  MaxLineLength: 80
 Style/InlineComment:
   Description: Avoid inline comments.
   Enabled: false
@@ -193,7 +183,7 @@ Style/PerlBackrefs:
   Description: Avoid Perl-style regex back references.
   StyleGuide: https://github.com/bbatsov/ruby-style-guide#no-perl-regexp-last-matchers
   Enabled: false
-Style/PredicateName:
+Naming/PredicateName:
   Description: Check the names of predicate methods.
   StyleGuide: https://github.com/bbatsov/ruby-style-guide#bool-methods-qmark
   Enabled: true
@@ -201,7 +191,7 @@ Style/PredicateName:
   - is_
   - has_
   - have_
-  NamePrefixBlacklist:
+  ForbiddenPrefixes:
   - is_
   Exclude:
   - spec/**/*
@@ -247,40 +237,21 @@ Style/SpecialGlobalVars:
   Description: Avoid Perl-style global variables.
   StyleGuide: https://github.com/bbatsov/ruby-style-guide#no-cryptic-perlisms
   Enabled: false
-Style/StringLiterals:
-  Description: Checks if uses of quotes match the configured preference.
-  StyleGuide: https://github.com/bbatsov/ruby-style-guide#consistent-string-literals
-  Enabled: true
-  EnforcedStyle: single_quotes
-  SupportedStyles:
-  - single_quotes
-  - double_quotes
-Style/StringLiteralsInInterpolation:
-  Description: Checks if uses of quotes inside expressions in interpolated strings
-    match the configured preference.
-  Enabled: true
-  EnforcedStyle: single_quotes
-  SupportedStyles:
-  - single_quotes
-  - double_quotes
 Style/TrailingCommaInArguments:
   Description: 'Checks for trailing comma in argument lists.'
   StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#no-trailing-array-commas'
   Enabled: true
   EnforcedStyleForMultiline: no_comma
-  SupportedStyles:
-  - comma
-  - consistent_comma
-  - no_comma
-Style/TrailingCommaInLiteral:
+Style/TrailingCommaInArrayLiteral:
   Description: 'Checks for trailing comma in array and hash literals.'
   StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#no-trailing-array-commas'
   Enabled: true
   EnforcedStyleForMultiline: no_comma
-  SupportedStyles:
-  - comma
-  - consistent_comma
-  - no_comma
+Style/TrailingCommaInHashLiteral:
+  Description: 'Checks for trailing comma in array and hash literals.'
+  StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#no-trailing-array-commas'
+  Enabled: true
+  EnforcedStyleForMultiline: no_comma
 Style/VariableInterpolation:
   Description: Don't interpolate global, instance and class variables directly in
     strings.
