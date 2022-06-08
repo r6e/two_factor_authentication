@@ -1,32 +1,37 @@
-source 'https://rubygems.org'
+source "https://rubygems.org"
 
-# Specify your gem's dependencies in devise_ip_filter.gemspec
+# Specify your gem"s dependencies in devise_ip_filter.gemspec
 gemspec
 
-rails_version = ENV["RAILS_VERSION"] || "default"
+env_rails_version = ENV.fetch("RAILS_VERSION", "default")
 
-case rails_version
-when 'master'
-  gem 'rails', {github: 'rails/rails'}
-when 'default'
-  gem 'rails', '~> 7.0.3'
-else
-  gem 'rails', *rails_version.split(', ')
+rails_version =
+  case env_rails_version
+  when "master"
+    {github: "rails/rails"}
+  when "default"
+    "~> 7.0.3"
+  else
+    env_rails_version
+  end
+
+gem "rails", rails_version
+
+if Gem::Version.new(RUBY_VERSION) >= Gem::Version.new("3.0.0")
+  gem "net-smtp", require: false
 end
 
-# gem "railties", rails # rspec-rails tries to grab the absolute latest on GitHub actions
-
-if Gem::Version.new(RUBY_VERSION) >= Gem::Version.new('3.0.0')
-  gem 'net-smtp', require: false
-end
+gem "rake", "~> 13.0"
+gem "rubocop", "~> 1.21"
 
 group :test, :development do
-  gem 'sqlite3'
-  gem 'rspec-rails'
+  gem "sqlite3"
 end
 
 group :test do
-  gem 'rack_session_access'
-  gem 'ammeter'
+  gem "rack_session_access"
+  gem "ammeter"
+  gem "rspec", "~> 3.0"
+  gem "rspec-rails"
   gem "test-unit", "~> 3.0"
 end
