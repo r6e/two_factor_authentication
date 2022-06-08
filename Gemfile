@@ -21,11 +21,6 @@ if Gem::Version.new(RUBY_VERSION) >= Gem::Version.new("3.0.0")
   gem "net-smtp", require: false
 end
 
-# TODO: Implement a lighter-weight way of doing this
-if Gem::Version.new(rails_version) >= Gem::Version.new("7.0")
-  gem "sprockets-rails"
-end
-
 gem "rake", "~> 13.0"
 gem "rubocop", "~> 1.21"
 
